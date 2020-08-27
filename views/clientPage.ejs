@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Psychologist</title>
+</head>
+<body>
+    <h1>Helo Client</h1>
+    <a href="/">Home</a> <br><br>
+
+    <form action="/psychologistclients/add/records" method="POST">
+        <label for="question">Any question?</label><br>
+        <input type="textarea" name="question"><br><br>
+
+        <label for="psychologist">Select Psychologist</label><br>
+        <select name="PsychologistId" id="psychologist">
+            <option value="">--Select Psychologist</option>
+            <% psychologistData.forEach(datum => { %>
+                <option value="<%= datum['id'] %>"><%= datum['name'] %></option>
+            <% }) %>
+        </select><br><br>
+
+        <button type="submit">Ask</button>
+    </form><br><br>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>No</td>
+                <td>Question</td>
+                <td>Answer</td>
+                <td>Psychologist</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% mixed.forEach((datum, i) => { %>
+                <tr>
+                    <td><%= ++i %></td>
+                    <td><%= datum['question'] %></td>
+                    <td><%= datum['answer'] ? datum['answer'] : "not answered" %></td>
+                    <td><%= datum['Psychologist'].name %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table><br><br>
+
+    
+    <a href="/logout">Logout</a>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Psychologist</title>
+</head>
+<body>
+    <h1>Psychologist Registration</h1>
+    <a href="/">Home</a><br><br>
+
+    <% if(errors){ %>
+        <% errors.forEach(err => { %>
+            <p style="color: red;"><%= err %></p>
+        <% }) %>
+    <% } %>
+    <form action="/psychologists/create" method="POST">
+        <!-- Name -->
+        <label for="name">Name</label><br>
+        <input type="text" name="name"><br><br>
+
+        <!-- Specialist -->
+        <label for="specialist">Specialist</label><br>
+        <select name="specialist" id="specialist">
+            <option value="">--Select Specialist</option>
+            <option value="industri_organisasi">PIO</option>
+            <option value="klinis">Klinis</option>
+            <option value="perkembangan">Perkembangan</option>
+            <option value="sosial">Sosial</option>
+            <option value="forensik">Forensik</option>
+        </select><br><br>
+
+        <!-- Email -->
+        <label for="email">Email</label><br>
+        <input type="text" name="email"><br><br>
+
+        <!-- Username -->
+        <label for="username">Username</label><br>
+        <input type="text" name="username"><br><br>
+
+        <!-- Password -->
+        <label for="password">Password</label><br>
+        <input type="password" name="password"><br><br>
+
+        <button type="submit">Create</button> <button style="color: white; margin-left: 10px; padding: 2px;"><a href="/" style="text-decoration: none; color: black">Cancel</a></button>
+    </form>
+</body>
+</html>

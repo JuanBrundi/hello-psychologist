@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Psychologist</title>
+</head>
+<body>
+    <h1>Helo Psychologist</h1>
+    <a href="/">Home</a> <br><br>
+
+    <h3>Incoming Questions</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>No</td>
+                <td>Question</td>
+                <td>From</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach((datum, i) => { %>
+                <% if(!datum.answer){ %>
+                <tr>
+                    <td><%= ++i %></td>
+                    <td><%= datum.question %></td>
+                    <td><%= datum.Client.name %></td>
+                    <td><a href="/psychologists/answer/<%= datum.id %>">Answer</a></td>
+                </tr>
+                <% } %>
+            <% }) %>
+        </tbody>
+    </table><br><br>
+
+    <% if(answer){ %>
+        <form action="/psychologists/answer/<%= data.cliId %>" method="POST">
+            <label for="answer">Answer</label><br>
+            <input type="textarea" name="answer" id="answer"><br><br>
+
+            <button type="Answer">Answer</button>
+        </form>
+    <% } %>
+
+    <h3>Answered Questions</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>No</td>
+                <td>Question</td>
+                <td>From</td>
+                <td>Answer</td>
+                <td>Kirim W.A</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach((datum, i) => { %>
+                <tr>
+                    <td><%= ++i %></td>
+                    <td><%= datum.question %></td>
+                    <td><%= datum.Client.name %></td>
+                    <% if(datum.answer){ %>
+                        <td><%= datum.answer %></td>
+                        <td><button onClick="sendMessage('<%= datum.answer %>', '<%= datum.question %>', '<%= datum.Client.name %>')">Kirim W.A</button></td>
+                    <% } %>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table><br><br>
+
+
+
+    <a href="/logout">Logout</a>
+
+    <script>
+        function sendMessage(answer, question, name) {
+            console.log(answer, question, name)
+            window.open(`https://wa.me/6283807702018?text=Hi ${name}, pertanyaan anda ${question}, di jawab: ${answer}`, "_blank");
+        }
+    </script>
+</body>
+</html>
