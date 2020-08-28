@@ -64,8 +64,7 @@ class Psychologists {
         let clientId = req.params.id
 
         let answered = req.body.answer
-
-        PsychologistClient.update({answer: answered},{where: {id: clientId, question}})
+        PsychologistClient.update({answer: answered},{where: {ClientId: clientId, question}})
             .then(data => {
                 let transporter = nodemailer.createTransport({
                     service: 'gmail',
