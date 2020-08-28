@@ -1,6 +1,5 @@
 const {Client, PsychologistClient, Psychologist} = require(`../models`)
 
-console.log('CLIENT =====================', Client)
 class Clients {
     static createForm(req,res){
         let errors = req.app.locals.errors

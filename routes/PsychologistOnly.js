@@ -10,7 +10,7 @@ routes.post(`/create`, PsychologistCtr.create)
 // Psychologist Page
 routes.use(checkAuth)
 routes.get(`/page`, PsychologistCtr.page)
-routes.get(`/answer/:id`, PsychologistCtr.answer)
+routes.get(`/answer/`, PsychologistCtr.answer)
 routes.post(`/answer/:id`, PsychologistCtr.answered)
 
 

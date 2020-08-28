@@ -36,32 +36,36 @@ class Psychologists {
 
     static page(req, res){
         let answer = req.app.locals.answer
+        let clientId = req.app.locals.clientId
+        delete req.app.locals.clientId
         delete req.app.locals.answer
-
-        let clientQuestionId = req.app.locals.cliId
-        delete req.app.locals.cliId
 
         PsychologistClient.findAll({where: {PsychologistId: req.session.PsychologistId}, include: [Client, Psychologist]})
             .then(data => {
-                // res.send(data)
-                console.log(data)
-                res.render(`psychologistPage`, {data, answer, cliId: clientQuestionId})
+                res.render(`psychologistPage`, {data, answer, cliId: clientId})
             })
             .catch(err => {
-                res.send(err)
+                console.log(err)
+                res.send(`Error find data`)
             })
     }
 
     static answer(req, res){
         req.app.locals.answer = true
-        req.app.locals.cliId = req.params.id
+        req.app.locals.question = req.query.question
+        req.app.locals.clientId = req.query.clientId
         res.redirect(`/psychologists/page`)
     }
 
     static answered(req, res){
+        let question = req.app.locals.question
+        delete req.app.locals.question
+
+        let clientId = req.params.id
+
         let answered = req.body.answer
 
-        PsychologistClient.update({answer: answered},{where: {id: req.params.id}})
+        PsychologistClient.update({answer: answered},{where: {id: clientId, question}})
             .then(data => {
                 let transporter = nodemailer.createTransport({
                     service: 'gmail',

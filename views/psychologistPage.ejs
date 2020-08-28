@@ -26,7 +26,7 @@
                     <td><%= ++i %></td>
                     <td><%= datum.question %></td>
                     <td><%= datum.Client.name %></td>
-                    <td><a href="/psychologists/answer/<%= datum.id %>">Answer</a></td>
+                    <td><a href="/psychologists/answer?question=<%= datum.question %>&clientId=<%= datum.Client.id %>">Answer</a></td>
                 </tr>
                 <% } %>
             <% }) %>
@@ -34,7 +34,7 @@
     </table><br><br>
 
     <% if(answer){ %>
-        <form action="/psychologists/answer/<%= data.cliId %>" method="POST">
+        <form action="/psychologists/answer/<%= cliId %>" method="POST">
             <label for="answer">Answer</label><br>
             <input type="textarea" name="answer" id="answer"><br><br>
 
